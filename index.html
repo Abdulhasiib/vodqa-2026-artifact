@@ -1,0 +1,1443 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<style>html{-webkit-text-size-adjust:100%}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Rule Book Trial</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    color-scheme: light;
+    --ground:   #f6f7f8;
+    --surface:  #ffffff;
+    --sunken:   #eef0f2;
+    --line:     #dde1e5;
+    --line-firm:#c3cad1;
+    --ink:      #14181c;
+    --ink-soft: #4d5865;
+    --ink-faint:#78838f;
+    --accent:   #0f6f5c;
+    --accent-soft: #e4f0ed;
+    --add:      #10653d;
+    --add-bg:   #e8f4ec;
+    --del:      #9e2b21;
+    --del-bg:   #fbeceb;
+    --warn:     #8a5a06;
+    --warn-bg:  #fdf3e2;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --ground:   #121518;
+      --surface:  #191d21;
+      --sunken:   #1f242a;
+      --line:     #2b3238;
+      --line-firm:#3d464e;
+      --ink:      #e7eaed;
+      --ink-soft: #a6b0ba;
+      --ink-faint:#7d878f;
+      --accent:   #4cbfa6;
+      --accent-soft: #14312b;
+      --add:      #5cc98c;
+      --add-bg:   #142b1f;
+      --del:      #e8827a;
+      --del-bg:   #2e1917;
+      --warn:     #d8a44a;
+      --warn-bg:  #2b2214;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --ground:   #121518;
+    --surface:  #191d21;
+    --sunken:   #1f242a;
+    --line:     #2b3238;
+    --line-firm:#3d464e;
+    --ink:      #e7eaed;
+    --ink-soft: #a6b0ba;
+    --ink-faint:#7d878f;
+    --accent:   #4cbfa6;
+    --accent-soft: #14312b;
+    --add:      #5cc98c;
+    --add-bg:   #142b1f;
+    --del:      #e8827a;
+    --del-bg:   #2e1917;
+    --warn:     #d8a44a;
+    --warn-bg:  #2b2214;
+  }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.62;
+    -webkit-font-smoothing: antialiased;
+  }
+  * { box-sizing: border-box; }
+
+  .masthead {
+    border-bottom: 1px solid var(--line);
+    background: var(--surface);
+  }
+  .wrap {
+    max-width: 860px;
+    margin: 0 auto;
+    padding-inline: 20px;
+  }
+  .masthead .wrap { padding-block: 34px 28px; }
+
+  .eyebrow {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin: 0 0 14px;
+  }
+  h1 {
+    font-family: "Source Serif 4", Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(27px, 5vw, 38px);
+    line-height: 1.16;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+    margin: 0 0 12px;
+  }
+  .standfirst {
+    font-size: 17px;
+    color: var(--ink-soft);
+    max-width: 62ch;
+    margin: 0;
+  }
+  .byline {
+    margin: 20px 0 0;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+    font-size: 15px;
+    color: var(--ink);
+  }
+  .byline .who { font-weight: 600; }
+  .byline .org {
+    color: var(--ink-soft);
+  }
+  .byline .sep { color: var(--line-firm); padding-inline: 8px; }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 22px;
+    margin: 24px 0 0;
+    padding: 0;
+    list-style: none;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 12px;
+    color: var(--ink-faint);
+  }
+  .meta b { color: var(--ink-soft); font-weight: 500; }
+
+  main .wrap { padding-block: 8px 56px; }
+
+  section { padding-block: 34px; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: 0; }
+
+  h2 {
+    font-family: "Source Serif 4", Georgia, serif;
+    font-weight: 600;
+    font-size: 23px;
+    line-height: 1.24;
+    margin: 0 0 6px;
+    text-wrap: balance;
+  }
+  h2 .num {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 7px;
+    letter-spacing: 0.08em;
+  }
+  h3 {
+    font-family: "IBM Plex Sans", sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 28px 0 10px;
+  }
+  p { max-width: 68ch; margin: 0 0 14px; }
+  p:last-child { margin-bottom: 0; }
+  strong { font-weight: 600; }
+  a { color: var(--accent); }
+
+  /* the prompt, quoted verbatim */
+  .prompt {
+    border-left: 3px solid var(--accent);
+    background: var(--accent-soft);
+    padding: 16px 18px;
+    margin: 18px 0;
+    font-family: "Source Serif 4", Georgia, serif;
+    font-size: 17px;
+    line-height: 1.5;
+  }
+
+  /* key/value facts */
+  dl.facts {
+    display: grid;
+    grid-template-columns: minmax(130px, 200px) 1fr;
+    gap: 1px;
+    margin: 18px 0 0;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  dl.facts dt, dl.facts dd {
+    background: var(--surface);
+    margin: 0;
+    padding: 11px 14px;
+  }
+  dl.facts dt {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 12px;
+    color: var(--ink-faint);
+  }
+  dl.facts dd { font-size: 14px; }
+  dl.facts dd code { font-size: 12.5px; }
+
+  code {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 13px;
+    background: var(--sunken);
+    padding: 1px 5px;
+    border: 1px solid var(--line);
+  }
+
+  /* results table */
+  .scroll { overflow-x: auto; margin: 18px 0 0; border: 1px solid var(--line); background: var(--surface); }
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  th, td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  thead th {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    font-weight: 500;
+    background: var(--sunken);
+    white-space: nowrap;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  td.mono, th.mono { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 12.5px; }
+  .status {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 2px 7px;
+    white-space: nowrap;
+  }
+  .status.bad  { color: var(--del); background: var(--del-bg); }
+  .status.good { color: var(--add); background: var(--add-bg); }
+  .status.dead { color: var(--warn); background: var(--warn-bg); }
+
+  /* terminal / gate output */
+  pre.term {
+    margin: 18px 0 0;
+    padding: 16px 18px;
+    background: var(--sunken);
+    border: 1px solid var(--line);
+    overflow-x: auto;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 12.5px;
+    line-height: 1.65;
+    color: var(--ink);
+  }
+  pre.term .k { color: var(--accent); }
+  pre.term .d { color: var(--del); }
+  pre.term .f { color: var(--ink-faint); }
+
+  /* diff rendering: real gutters, like a review */
+  .diff {
+    margin: 14px 0 0;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    overflow-x: auto;
+  }
+  .diff-file {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 12px;
+    padding: 8px 14px;
+    background: var(--sunken);
+    border-bottom: 1px solid var(--line);
+    color: var(--ink-soft);
+    position: sticky;
+    left: 0;
+  }
+  .diff table { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 12.5px; }
+  .diff td { padding: 0 10px; border: 0; white-space: pre; line-height: 1.55; }
+  .diff td.gut {
+    width: 1%;
+    padding-inline: 10px 8px;
+    text-align: right;
+    color: var(--ink-faint);
+    background: var(--sunken);
+    border-right: 1px solid var(--line);
+    user-select: none;
+    font-variant-numeric: tabular-nums;
+  }
+  .diff tr.add td { background: var(--add-bg); color: var(--add); }
+  .diff tr.del td { background: var(--del-bg); color: var(--del); }
+  .diff tr.hunk td { background: var(--sunken); color: var(--ink-faint); }
+  .diff tr.add td.gut, .diff tr.del td.gut { background: transparent; }
+
+  details {
+    margin: 18px 0 0;
+    border: 1px solid var(--line);
+    background: var(--surface);
+  }
+  details > summary {
+    cursor: pointer;
+    padding: 12px 14px;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 0.02em;
+  }
+  details > summary:hover { background: var(--sunken); }
+  details[open] > summary { border-bottom: 1px solid var(--line); }
+  details .diff, details pre.term { margin: 0; border: 0; }
+
+  /* the two-column contrast */
+  .contrast {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin: 20px 0 0;
+  }
+  .panel {
+    border: 1px solid var(--line);
+    background: var(--surface);
+    padding: 16px 18px;
+  }
+  .panel.flag { border-color: var(--line-firm); }
+  .panel h4 {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    font-weight: 500;
+    margin: 0 0 12px;
+  }
+  .panel pre {
+    margin: 0;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 12px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    color: var(--ink-soft);
+  }
+  .tally { margin: 0; display: grid; gap: 8px; }
+  .tally div {
+    display: flex;
+    justify-content: space-between;
+    gap: 14px;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 13px;
+    padding-bottom: 8px;
+    border-bottom: 1px dotted var(--line);
+  }
+  .tally div:last-child { border-bottom: 0; padding-bottom: 0; }
+  .tally b { color: var(--del); font-weight: 500; }
+
+  .pull {
+    font-family: "Source Serif 4", Georgia, serif;
+    font-size: clamp(19px, 3.2vw, 23px);
+    line-height: 1.38;
+    color: var(--ink);
+    border-top: 2px solid var(--accent);
+    padding-top: 18px;
+    margin: 26px 0 0;
+    max-width: 58ch;
+    text-wrap: balance;
+  }
+
+  ul.notes { margin: 16px 0 0; padding-left: 0; list-style: none; display: grid; gap: 13px; }
+  ul.notes li { padding-left: 20px; position: relative; max-width: 68ch; }
+  ul.notes li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-family: "IBM Plex Mono", monospace;
+  }
+
+  .pending {
+    display: inline-block;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--warn);
+    background: var(--warn-bg);
+    border: 1px solid var(--line);
+    padding: 2px 7px;
+    margin-left: 6px;
+    vertical-align: 2px;
+  }
+
+  footer { border-top: 1px solid var(--line); background: var(--surface); }
+  footer .wrap { padding-block: 26px 34px; }
+  footer p { font-size: 13px; color: var(--ink-faint); max-width: 70ch; }
+
+  @media (max-width: 640px) {
+    .contrast { grid-template-columns: 1fr; }
+    dl.facts { grid-template-columns: 1fr; }
+    dl.facts dt { padding-bottom: 0; border: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+</style>
+</head>
+<body>
+
+
+<header class="masthead">
+  <div class="wrap">
+    <p class="eyebrow">Evidence pack &middot; prepared for the programme committee</p>
+    <h1>Does a committed testability rule book change what a coding agent writes?</h1>
+    <p class="standfirst">A controlled trial on a public open-source application. One prompt, two
+      branches, one variable. Every diff, command and result on this page was produced by the runs
+      described here.</p>
+    <p class="byline">
+      <span class="who">Haseeb Mohammed</span><span class="sep">&middot;</span><span class="org">Hexagon</span>
+    </p>
+    <ul class="meta">
+      <li><b>Session</b> Testability as an Agent Skill</li>
+      <li><b>Runs</b> 24&ndash;25 Sep 2026</li>
+      <li><b>Application</b> mern-stack-example</li>
+    </ul>
+  </div>
+</header>
+
+<main>
+<div class="wrap">
+
+  <section>
+    <h2><span class="num">01 / The question</span>Whether the rule book changes the code, not the tests</h2>
+    <p>A coding agent asked for a feature will reason carefully about correctness. The question is
+      whether it does anything at all for the people who have to test the result afterwards &mdash;
+      and whether committing a testability rule book to the repository changes that.</p>
+    <p>The trial holds the application, the commit, the prompt and the model constant. The single
+      variable is whether a rule book is present on the branch.</p>
+
+    <dl class="facts">
+      <dt>application</dt>
+      <dd><strong>mongodb-developer/mern-stack-example</strong> &mdash; MongoDB's own MERN reference
+        application, Apache&#8209;2.0, actively maintained. React and Vite front end, Express and
+        MongoDB back end, 17 source files.</dd>
+      <dt>why this one</dt>
+      <dd>Small, real, well maintained, and carrying <strong>zero</strong> test hooks: the
+        <code>data-testid</code> count across the source is 0. Its list and navigation components
+        contain no <code>id</code> attributes either.</dd>
+      <dt>branches</dt>
+      <dd><code>baseline</code> &rarr; the application plus a Playwright harness and a test suite
+        written in advance. <code>no-testability</code> is identical to it.
+        <code>with-testability</code> adds the rule book, committed <em>before</em> the agent ran.</dd>
+      <dt>rule book</dt>
+      <dd>Three artifacts on the treatment branch only: an always-loaded baseline instruction file,
+        an on-demand playbook of four testability categories with stack idioms, and a gate script
+        that checks changed files.</dd>
+      <dt>sessions</dt>
+      <dd>Two fresh agent sessions with no shared history. Neither prompt mentions testability,
+        hooks, conventions or tests.</dd>
+    </dl>
+
+    <h3>The prompt, identical on both branches</h3>
+    <p class="prompt">Add a Date of Joining field to employee records: capture it when creating or
+      editing an employee, store it, and show it in the list. Leave the cell blank when no date is
+      set.</p>
+
+    <h3>What neither run was allowed to touch</h3>
+    <p>A twenty-test suite written before either run sat on both branches. An agent could
+      <strong>add</strong> tests for behaviour it created; it could never <strong>edit</strong> the
+      tests written in advance. Both runs complied.</p>
+  </section>
+
+  <section>
+    <h2><span class="num">02 / Before</span>Three commands against the untouched application</h2>
+    <p>Run against <code>baseline</code>, before either agent session. These are actual responses.</p>
+
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr><th class="mono">request</th><th>expected</th><th>actual</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="mono">GET /record/0000&hellip;0000<br><span style="color:var(--ink-faint)">well-formed id, no such record</span></td>
+            <td><span class="status good">404</span></td>
+            <td><span class="status bad">200</span> with the body <code>Not found</code></td>
+          </tr>
+          <tr>
+            <td class="mono">POST /record<br><span style="color:var(--ink-faint)">body: {}</span></td>
+            <td><span class="status good">400</span></td>
+            <td><span class="status bad">200</span> &mdash; and a record with no fields is created</td>
+          </tr>
+          <tr>
+            <td class="mono">GET /record/not-an-objectid</td>
+            <td><span class="status good">400</span></td>
+            <td><span class="status dead">no response</span> the API process has exited</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <pre class="term"><span class="d">BSONError</span>: input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+    at new ObjectId (.../bson/lib/bson.cjs:2147:23)
+    at .../mern/server/routes/record.js:24:22
+<span class="f">[exited with code 1]</span></pre>
+
+    <p class="pull">An unhandled async throw in an Express route exits the process. One malformed
+      URL segment is a denial of service &mdash; and a process that exits cannot be tested at all.</p>
+  </section>
+
+  <section>
+    <h2><span class="num">03 / Control</span>What the agent built with no rule book</h2>
+    <p>Competent work, and presented as such. It updated the form with a correctly associated
+      label, the list column, both API routes, the seed data, and the data-model document.
+      <strong>5 files changed, 62 insertions.</strong></p>
+
+    <h3>It reasoned about timezones unprompted</h3>
+    <div class="diff">
+      <div class="diff-file">mern/client/src/components/RecordList.jsx</div>
+      <table>
+        <tbody>
+          <tr class="add"><td class="gut">+</td><td>// dateOfJoining is stored as a "YYYY-MM-DD" string. Format it in UTC so the</td></tr>
+          <tr class="add"><td class="gut">+</td><td>// displayed day never shifts with the viewer's time zone.</td></tr>
+          <tr class="add"><td class="gut">+</td><td>function displayDate(value) {</td></tr>
+          <tr class="add"><td class="gut">+</td><td>  if (!value) return "";</td></tr>
+          <tr class="add"><td class="gut">+</td><td>  const date = new Date(`${value}T00:00:00Z`);</td></tr>
+          <tr class="add"><td class="gut">+</td><td>  if (isNaN(date)) return value;</td></tr>
+          <tr class="add"><td class="gut">+</td><td>  return date.toLocaleDateString(undefined, { timeZone: "UTC", &hellip; });</td></tr>
+          <tr class="add"><td class="gut">+</td><td>}</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>That is determinism &mdash; one of the four categories &mdash; handled well, with no rule book
+      present. It also chose a date-only string over a timestamp for the same reason, and documented
+      that decision in the repository's data-model file.</p>
+
+    <h3>And the API took the field with no validation</h3>
+    <div class="diff">
+      <div class="diff-file">mern/server/routes/record.js</div>
+      <table>
+        <tbody>
+          <tr><td class="gut">&nbsp;</td><td>      name: req.body.name,</td></tr>
+          <tr><td class="gut">&nbsp;</td><td>      position: req.body.position,</td></tr>
+          <tr><td class="gut">&nbsp;</td><td>      level: req.body.level,</td></tr>
+          <tr class="add"><td class="gut">+</td><td>      dateOfJoining: req.body.dateOfJoining || null,</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Any string is accepted and stored. Because the formatter falls through to the raw value on an
+      unparseable date, garbage is then rendered straight into the table.</p>
+
+    <details>
+      <summary>View the complete control diff &mdash; 5 files</summary>
+      <div class="diff"><div class="diff-file">EDD.md</div><table><tbody>
+<tr class="hunk"><td class="gut">…</td><td>@@ -16,6 +16,7 @@ _id:       ObjectId</td></tr>
+<tr><td class="gut"> </td><td> name:      string        # employee full name</td></tr>
+<tr><td class="gut"> </td><td> position:  string        # job title / role</td></tr>
+<tr><td class="gut"> </td><td> level:     string        # seniority level, e.g. "junior", "mid", "senior"</td></tr>
+<tr class="add"><td class="gut">+</td><td>dateOfJoining: string | null  # optional, "YYYY-MM-DD"; null or absent = not set</td></tr>
+<tr><td class="gut"> </td><td> ```</td></tr>
+<tr><td class="gut"> </td><td> </td></tr>
+<tr><td class="gut"> </td><td> ---</td></tr>
+<tr class="hunk"><td class="gut">…</td><td>@@ -37,6 +38,7 @@ erDiagram</td></tr>
+<tr><td class="gut"> </td><td>         string name</td></tr>
+<tr><td class="gut"> </td><td>         string position</td></tr>
+<tr><td class="gut"> </td><td>         string level</td></tr>
+<tr class="add"><td class="gut">+</td><td>        string dateOfJoining "optional, YYYY-MM-DD"</td></tr>
+<tr><td class="gut"> </td><td>     }</td></tr>
+<tr><td class="gut"> </td><td> ```</td></tr>
+<tr><td class="gut"> </td><td> </td></tr>
+<tr class="hunk"><td class="gut">…</td><td>@@ -47,3 +49,4 @@ erDiagram</td></tr>
+<tr><td class="gut"> </td><td> - No validation schema is enforced at the database level, and the current Express routes (`mern/server/routes/record.js`) do not enforce request-body validation.</td></tr>
+<tr><td class="gut"> </td><td> - `level` is a free-form string. Typical values used in the seed data: `junior`, `mid`, `senior`.</td></tr>
+<tr><td class="gut"> </td><td> - The application convention expects `name`, `position`, and `level`, but these fields are not currently enforced by backend validation.</td></tr>
+<tr class="add"><td class="gut">+</td><td>- `dateOfJoining` is optional. It is stored as a date-only `"YYYY-MM-DD"` string (the value an HTML `&lt;input type="date"&gt;` produces) rather than a BSON `Date`, so the calendar day never shifts across time zones. POST and PATCH normalize an empty or missing value to `null`; records created before this field existed have no `dateOfJoining` at all. Treat absent, `null`, and `""` alike as "not set" — the list shows a blank cell.</td></tr>
+</tbody></table></div>
+<div class="diff"><div class="diff-file">mern/client/src/components/Record.jsx</div><table><tbody>
+<tr class="hunk"><td class="gut">…</td><td>@@ -6,6 +6,7 @@ export default function Record() {</td></tr>
+<tr><td class="gut"> </td><td>     name: "",</td></tr>
+<tr><td class="gut"> </td><td>     position: "",</td></tr>
+<tr><td class="gut"> </td><td>     level: "",</td></tr>
+<tr class="add"><td class="gut">+</td><td>    dateOfJoining: "",</td></tr>
+<tr><td class="gut"> </td><td>   });</td></tr>
+<tr><td class="gut"> </td><td>   const [isNew, setIsNew] = useState(true);</td></tr>
+<tr><td class="gut"> </td><td>   const params = useParams();</td></tr>
+<tr class="hunk"><td class="gut">…</td><td>@@ -39,7 +40,11 @@ export default function Record() {</td></tr>
+<tr><td class="gut"> </td><td>         navigate("/");</td></tr>
+<tr><td class="gut"> </td><td>         return;</td></tr>
+<tr><td class="gut"> </td><td>       }</td></tr>
+<tr class="del"><td class="gut">−</td><td>      setForm({ ...record, level: normalizeLevel(record.level) });</td></tr>
+<tr class="add"><td class="gut">+</td><td>      setForm({</td></tr>
+<tr class="add"><td class="gut">+</td><td>        ...record,</td></tr>
+<tr class="add"><td class="gut">+</td><td>        level: normalizeLevel(record.level),</td></tr>
+<tr class="add"><td class="gut">+</td><td>        dateOfJoining: record.dateOfJoining || "",</td></tr>
+<tr class="add"><td class="gut">+</td><td>      });</td></tr>
+<tr><td class="gut"> </td><td>     }</td></tr>
+<tr><td class="gut"> </td><td>     fetchData();</td></tr>
+<tr><td class="gut"> </td><td>     return;</td></tr>
+<tr class="hunk"><td class="gut">…</td><td>@@ -84,7 +89,7 @@ export default function Record() {</td></tr>
+<tr><td class="gut"> </td><td>     } catch (error) {</td></tr>
+<tr><td class="gut"> </td><td>       console.error('A problem occurred adding or updating a record: ', error);</td></tr>
+<tr><td class="gut"> </td><td>     } finally {</td></tr>
+<tr class="del"><td class="gut">−</td><td>      setForm({ name: "", position: "", level: "" });</td></tr>
+<tr class="add"><td class="gut">+</td><td>      setForm({ name: "", position: "", level: "", dateOfJoining: "" });</td></tr>
+<tr><td class="gut"> </td><td>       navigate("/");</td></tr>
+<tr><td class="gut"> </td><td>     }</td></tr>
+<tr><td class="gut"> </td><td>   }</td></tr>
+<tr class="hunk"><td class="gut">…</td><td>@@ -151,6 +156,26 @@ export default function Record() {</td></tr>
+<tr><td class="gut"> </td><td>                 &lt;/div&gt;</td></tr>
+<tr><td class="gut"> </td><td>               &lt;/div&gt;</td></tr>
+<tr><td class="gut"> </td><td>             &lt;/div&gt;</td></tr>
+<tr class="add"><td class="gut">+</td><td>            &lt;div className="sm:col-span-4"&gt;</td></tr>
+<tr class="add"><td class="gut">+</td><td>              &lt;label</td></tr>
+<tr class="add"><td class="gut">+</td><td>                htmlFor="dateOfJoining"</td></tr>
+<tr class="add"><td class="gut">+</td><td>                className="block text-sm font-medium leading-6 text-slate-900"</td></tr>
+<tr class="add"><td class="gut">+</td><td>              &gt;</td></tr>
+<tr class="add"><td class="gut">+</td><td>                Date of Joining</td></tr>
+<tr class="add"><td class="gut">+</td><td>              &lt;/label&gt;</td></tr>
+<tr class="add"><td class="gut">+</td><td>              &lt;div className="mt-2"&gt;</td></tr>
+<tr class="add"><td class="gut">+</td><td>                &lt;div className="flex rounded-md shadow-sm ring-1 ring-inset ring-slate-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md"&gt;</td></tr>
+<tr class="add"><td class="gut">+</td><td>                  &lt;input</td></tr>
+<tr class="add"><td class="gut">+</td><td>                    type="date"</td></tr>
+<tr class="add"><td class="gut">+</td><td>                    name="dateOfJoining"</td></tr>
+<tr class="add"><td class="gut">+</td><td>                    id="dateOfJoining"</td></tr>
+<tr class="add"><td class="gut">+</td><td>                    className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-slate-900 placeholder:text-slate-400 focus:ring-0 sm:text-sm sm:leading-6"</td></tr>
+<tr class="add"><td class="gut">+</td><td>                    value={form.dateOfJoining}</td></tr>
+<tr class="add"><td class="gut">+</td><td>                    onChange={(e) =&gt; updateForm({ dateOfJoining: e.target.value })}</td></tr>
+<tr class="add"><td class="gut">+</td><td>                  /&gt;</td></tr>
+<tr class="add"><td class="gut">+</td><td>                &lt;/div&gt;</td></tr>
+<tr class="add"><td class="gut">+</td><td>              &lt;/div&gt;</td></tr>
+<tr class="add"><td class="gut">+</td><td>            &lt;/div&gt;</td></tr>
+<tr><td class="gut"> </td><td>             &lt;div&gt;</td></tr>
+<tr><td class="gut"> </td><td>               &lt;fieldset className="mt-4"&gt;</td></tr>
+<tr><td class="gut"> </td><td>                 &lt;legend className="sr-only"&gt;Position Options&lt;/legend&gt;</td></tr>
+</tbody></table></div>
+<div class="diff"><div class="diff-file">mern/client/src/components/RecordList.jsx</div><table><tbody>
+<tr class="hunk"><td class="gut">…</td><td>@@ -10,6 +10,20 @@ function displayLevel(level) {</td></tr>
+<tr><td class="gut"> </td><td>   return level;</td></tr>
+<tr><td class="gut"> </td><td> }</td></tr>
+<tr><td class="gut"> </td><td> </td></tr>
+<tr class="add"><td class="gut">+</td><td>// dateOfJoining is stored as a "YYYY-MM-DD" string. Format it in UTC so the</td></tr>
+<tr class="add"><td class="gut">+</td><td>// displayed day never shifts with the viewer's time zone.</td></tr>
+<tr class="add"><td class="gut">+</td><td>function displayDate(value) {</td></tr>
+<tr class="add"><td class="gut">+</td><td>  if (!value) return "";</td></tr>
+<tr class="add"><td class="gut">+</td><td>  const date = new Date(`${value}T00:00:00Z`);</td></tr>
+<tr class="add"><td class="gut">+</td><td>  if (isNaN(date)) return value;</td></tr>
+<tr class="add"><td class="gut">+</td><td>  return date.toLocaleDateString(undefined, {</td></tr>
+<tr class="add"><td class="gut">+</td><td>    timeZone: "UTC",</td></tr>
+<tr class="add"><td class="gut">+</td><td>    year: "numeric",</td></tr>
+<tr class="add"><td class="gut">+</td><td>    month: "short",</td></tr>
+<tr class="add"><td class="gut">+</td><td>    day: "numeric",</td></tr>
+<tr class="add"><td class="gut">+</td><td>  });</td></tr>
+<tr class="add"><td class="gut">+</td><td>}</td></tr>
+<tr class="add"><td class="gut">+</td><td> </td></tr>
+<tr><td class="gut"> </td><td> const Record = (props) =&gt; (</td></tr>
+<tr><td class="gut"> </td><td>   &lt;tr className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted"&gt;</td></tr>
+<tr><td class="gut"> </td><td>     &lt;td className="p-4 align-middle [&amp;amp;:has([role=checkbox])]:pr-0"&gt;</td></tr>
+<tr class="hunk"><td class="gut">…</td><td>@@ -21,6 +35,9 @@ const Record = (props) =&gt; (</td></tr>
+<tr><td class="gut"> </td><td>     &lt;td className="p-4 align-middle [&amp;amp;:has([role=checkbox])]:pr-0"&gt;</td></tr>
+<tr><td class="gut"> </td><td>       {displayLevel(props.record.level)}</td></tr>
+<tr><td class="gut"> </td><td>     &lt;/td&gt;</td></tr>
+<tr class="add"><td class="gut">+</td><td>    &lt;td className="p-4 align-middle [&amp;amp;:has([role=checkbox])]:pr-0"&gt;</td></tr>
+<tr class="add"><td class="gut">+</td><td>      {displayDate(props.record.dateOfJoining)}</td></tr>
+<tr class="add"><td class="gut">+</td><td>    &lt;/td&gt;</td></tr>
+<tr><td class="gut"> </td><td>     &lt;td className="p-4 align-middle [&amp;amp;:has([role=checkbox])]:pr-0"&gt;</td></tr>
+<tr><td class="gut"> </td><td>       &lt;div className="flex gap-2"&gt;</td></tr>
+<tr><td class="gut"> </td><td>         &lt;Link</td></tr>
+<tr class="hunk"><td class="gut">…</td><td>@@ -103,6 +120,9 @@ export default function RecordList() {</td></tr>
+<tr><td class="gut"> </td><td>                 &lt;th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;amp;:has([role=checkbox])]:pr-0"&gt;</td></tr>
+<tr><td class="gut"> </td><td>                   Level</td></tr>
+<tr><td class="gut"> </td><td>                 &lt;/th&gt;</td></tr>
+<tr class="add"><td class="gut">+</td><td>                &lt;th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;amp;:has([role=checkbox])]:pr-0"&gt;</td></tr>
+<tr class="add"><td class="gut">+</td><td>                  Date of Joining</td></tr>
+<tr class="add"><td class="gut">+</td><td>                &lt;/th&gt;</td></tr>
+<tr><td class="gut"> </td><td>                 &lt;th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;amp;:has([role=checkbox])]:pr-0"&gt;</td></tr>
+<tr><td class="gut"> </td><td>                   Action</td></tr>
+<tr><td class="gut"> </td><td>                 &lt;/th&gt;</td></tr>
+</tbody></table></div>
+<div class="diff"><div class="diff-file">mern/server/routes/record.js</div><table><tbody>
+<tr class="hunk"><td class="gut">…</td><td>@@ -35,6 +35,7 @@ router.post("/", async (req, res) =&gt; {</td></tr>
+<tr><td class="gut"> </td><td>       name: req.body.name,</td></tr>
+<tr><td class="gut"> </td><td>       position: req.body.position,</td></tr>
+<tr><td class="gut"> </td><td>       level: req.body.level,</td></tr>
+<tr class="add"><td class="gut">+</td><td>      dateOfJoining: req.body.dateOfJoining || null,</td></tr>
+<tr><td class="gut"> </td><td>     };</td></tr>
+<tr><td class="gut"> </td><td>     let collection = await db.collection("records");</td></tr>
+<tr><td class="gut"> </td><td>     let result = await collection.insertOne(newDocument);</td></tr>
+<tr class="hunk"><td class="gut">…</td><td>@@ -54,6 +55,7 @@ router.patch("/:id", async (req, res) =&gt; {</td></tr>
+<tr><td class="gut"> </td><td>         name: req.body.name,</td></tr>
+<tr><td class="gut"> </td><td>         position: req.body.position,</td></tr>
+<tr><td class="gut"> </td><td>         level: req.body.level,</td></tr>
+<tr class="add"><td class="gut">+</td><td>        dateOfJoining: req.body.dateOfJoining || null,</td></tr>
+<tr><td class="gut"> </td><td>       },</td></tr>
+<tr><td class="gut"> </td><td>     };</td></tr>
+<tr><td class="gut"> </td><td> </td></tr>
+</tbody></table></div>
+<div class="diff"><div class="diff-file">mern/server/seed.js</div><table><tbody>
+<tr class="hunk"><td class="gut">…</td><td>@@ -31,16 +31,16 @@ const client = new MongoClient(URI, {</td></tr>
+<tr><td class="gut"> </td><td> });</td></tr>
+<tr><td class="gut"> </td><td> </td></tr>
+<tr><td class="gut"> </td><td> const records = [</td></tr>
+<tr class="del"><td class="gut">−</td><td>  { name: "Alice Johnson",  position: "Software Engineer",       level: "Senior" },</td></tr>
+<tr class="del"><td class="gut">−</td><td>  { name: "Bob Martinez",   position: "Product Manager",         level: "Intern" },</td></tr>
+<tr class="del"><td class="gut">−</td><td>  { name: "Carol Lee",      position: "UX Designer",             level: "Junior" },</td></tr>
+<tr class="del"><td class="gut">−</td><td>  { name: "David Kim",      position: "DevOps Engineer",         level: "Intern" },</td></tr>
+<tr class="del"><td class="gut">−</td><td>  { name: "Eva Nguyen",     position: "Data Scientist",          level: "Senior" },</td></tr>
+<tr class="del"><td class="gut">−</td><td>  { name: "Frank Chen",     position: "Frontend Developer",      level: "Junior" },</td></tr>
+<tr class="del"><td class="gut">−</td><td>  { name: "Grace Patel",    position: "Backend Developer",       level: "Intern" },</td></tr>
+<tr class="del"><td class="gut">−</td><td>  { name: "Henry Okafor",   position: "QA Engineer",             level: "Junior" },</td></tr>
+<tr class="del"><td class="gut">−</td><td>  { name: "Iris Müller",    position: "Engineering Manager",     level: "Senior" },</td></tr>
+<tr class="del"><td class="gut">−</td><td>  { name: "James Tanaka",   position: "Security Engineer",       level: "Intern" },</td></tr>
+<tr class="add"><td class="gut">+</td><td>  { name: "Alice Johnson",  position: "Software Engineer",       level: "Senior", dateOfJoining: "2019-03-11" },</td></tr>
+<tr class="add"><td class="gut">+</td><td>  { name: "Bob Martinez",   position: "Product Manager",         level: "Intern", dateOfJoining: "2026-06-01" },</td></tr>
+<tr class="add"><td class="gut">+</td><td>  { name: "Carol Lee",      position: "UX Designer",             level: "Junior", dateOfJoining: "2024-01-15" },</td></tr>
+<tr class="add"><td class="gut">+</td><td>  { name: "David Kim",      position: "DevOps Engineer",         level: "Intern", dateOfJoining: null },</td></tr>
+<tr class="add"><td class="gut">+</td><td>  { name: "Eva Nguyen",     position: "Data Scientist",          level: "Senior", dateOfJoining: "2018-09-03" },</td></tr>
+<tr class="add"><td class="gut">+</td><td>  { name: "Frank Chen",     position: "Frontend Developer",      level: "Junior", dateOfJoining: "2023-07-24" },</td></tr>
+<tr class="add"><td class="gut">+</td><td>  { name: "Grace Patel",    position: "Backend Developer",       level: "Intern", dateOfJoining: null },</td></tr>
+<tr class="add"><td class="gut">+</td><td>  { name: "Henry Okafor",   position: "QA Engineer",             level: "Junior", dateOfJoining: "2022-11-07" },</td></tr>
+<tr class="add"><td class="gut">+</td><td>  { name: "Iris Müller",    position: "Engineering Manager",     level: "Senior", dateOfJoining: "2016-04-18" },</td></tr>
+<tr class="add"><td class="gut">+</td><td>  { name: "James Tanaka",   position: "Security Engineer",       level: "Intern", dateOfJoining: "2026-08-17" },</td></tr>
+<tr><td class="gut"> </td><td> ];</td></tr>
+<tr><td class="gut"> </td><td> </td></tr>
+<tr><td class="gut"> </td><td> try {</td></tr>
+<tr><td class="gut"> </td><td> </td></tr>
+</tbody></table></div>
+    </details>
+  </section>
+
+  <section>
+    <h2><span class="num">04 / The finding</span>What it got right, and what it never considered</h2>
+
+    <div class="contrast">
+      <div class="panel">
+        <h4>Handled without being asked</h4>
+        <ul class="notes" style="margin-top:0">
+          <li>Timezone-stable date handling, with a comment explaining the choice</li>
+          <li>A form input with <code>id</code>, <code>name</code> and an associated label</li>
+          <li>Absent values normalised consistently</li>
+          <li>The data model documented</li>
+        </ul>
+      </div>
+      <div class="panel flag">
+        <h4>Not considered at all</h4>
+        <div class="tally">
+          <div><span>test hooks added</span><b>0</b></div>
+          <div><span>input validated</span><b>none</b></div>
+          <div><span>error codes a test can assert</span><b>none</b></div>
+          <div><span>state reachable programmatically</span><b>no</b></div>
+        </div>
+      </div>
+    </div>
+
+    <p class="pull">It solved everything it could reason about as correctness, and nothing that
+      serves an outside observer &mdash; because nothing in its context said an outside observer
+      exists.</p>
+
+    <p style="margin-top:22px">That is the finding the session is built on, and it is why the rule
+      book is a rule book rather than a code-review habit: it is the observer's needs, written where
+      the author will read them.</p>
+  </section>
+
+  <section>
+    <h2><span class="num">05 / Treatment</span>The same prompt, with the rule book committed</h2>
+    <p>Same application, same prompt, a fresh session. The diff below excludes the rule book itself,
+      so it shows only the feature work &mdash; directly comparable with the control.</p>
+
+    <h3>Thirteen stable hooks, and identity instead of text</h3>
+    <div class="diff">
+      <div class="diff-file">mern/client/src/components/RecordList.jsx</div>
+      <table>
+        <tbody>
+          <tr class="add"><td class="gut">+</td><td>    data-testid="record-row"</td></tr>
+          <tr class="add"><td class="gut">+</td><td>    data-record-id={props.record._id}</td></tr>
+          <tr class="add"><td class="gut">+</td><td>    &lt;td data-testid="record-date-of-joining"&gt;</td></tr>
+          <tr class="add"><td class="gut">+</td><td>        &lt;span data-testid="record-date-of-joining-empty"&gt;&lt;/span&gt;</td></tr>
+          <tr class="add"><td class="gut">+</td><td>          data-testid="record-edit"</td></tr>
+          <tr class="add"><td class="gut">+</td><td>          data-testid="record-delete"</td></tr>
+          <tr class="add"><td class="gut">+</td><td>          &lt;table data-testid="record-list"&gt;</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>An absent date renders an element a test can find, rather than nothing at all. A row carries
+      its own identity, so a test never has to match on displayed text.</p>
+
+    <h3>Validation at the boundary, and a typed error envelope</h3>
+    <div class="diff">
+      <div class="diff-file">mern/server/routes/record.js</div>
+      <table>
+        <tbody>
+          <tr class="add"><td class="gut">+</td><td>export const fieldError = (code, field, message) =&gt; ({ error: { code, field, message } });</td></tr>
+          <tr class="add"><td class="gut">+</td><td></td></tr>
+          <tr class="add"><td class="gut">+</td><td>// Wraps an async handler so a throw becomes a 500 envelope instead of an</td></tr>
+          <tr class="add"><td class="gut">+</td><td>// unhandled rejection that takes the process down.</td></tr>
+          <tr class="add"><td class="gut">+</td><td>const handle = (fn) =&gt; async (req, res) =&gt; { &hellip; };</td></tr>
+          <tr class="add"><td class="gut">+</td><td></td></tr>
+          <tr class="add"><td class="gut">+</td><td>  if (!ObjectId.isValid(req.params.id)) return res.status(400).json(invalidId());</td></tr>
+          <tr class="del"><td class="gut">&minus;</td><td>  res.send(results).status(200);</td></tr>
+          <tr class="add"><td class="gut">+</td><td>  res.status(200).json(results);</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>The task never mentioned the route that was crashing. The gate checks changed <em>files</em>,
+      so the moment the agent touched that file, everything in it came under the rules.</p>
+
+    <details>
+      <summary>View the complete treatment diff &mdash; 3 files, rule book excluded</summary>
+      <div class="diff"><div class="diff-file">mern/client/src/components/Record.jsx</div><table><tbody>
+<tr class="hunk"><td class="gut">…</td><td>@@ -6,6 +6,7 @@ export default function Record() {</td></tr>
+<tr><td class="gut"> </td><td>     name: "",</td></tr>
+<tr><td class="gut"> </td><td>     position: "",</td></tr>
+<tr><td class="gut"> </td><td>     level: "",</td></tr>
+<tr class="add"><td class="gut">+</td><td>    dateOfJoining: "",</td></tr>
+<tr><td class="gut"> </td><td>   });</td></tr>
+<tr><td class="gut"> </td><td>   const [isNew, setIsNew] = useState(true);</td></tr>
+<tr><td class="gut"> </td><td>   const params = useParams();</td></tr>
+<tr class="hunk"><td class="gut">…</td><td>@@ -39,7 +40,11 @@ export default function Record() {</td></tr>
+<tr><td class="gut"> </td><td>         navigate("/");</td></tr>
+<tr><td class="gut"> </td><td>         return;</td></tr>
+<tr><td class="gut"> </td><td>       }</td></tr>
+<tr class="del"><td class="gut">−</td><td>      setForm({ ...record, level: normalizeLevel(record.level) });</td></tr>
+<tr class="add"><td class="gut">+</td><td>      setForm({</td></tr>
+<tr class="add"><td class="gut">+</td><td>        ...record,</td></tr>
+<tr class="add"><td class="gut">+</td><td>        level: normalizeLevel(record.level),</td></tr>
+<tr class="add"><td class="gut">+</td><td>        dateOfJoining: record.dateOfJoining ?? "",</td></tr>
+<tr class="add"><td class="gut">+</td><td>      });</td></tr>
+<tr><td class="gut"> </td><td>     }</td></tr>
+<tr><td class="gut"> </td><td>     fetchData();</td></tr>
+<tr><td class="gut"> </td><td>     return;</td></tr>
+<tr class="hunk"><td class="gut">…</td><td>@@ -55,7 +60,8 @@ export default function Record() {</td></tr>
+<tr><td class="gut"> </td><td>   // This function will handle the submission.</td></tr>
+<tr><td class="gut"> </td><td>   async function onSubmit(e) {</td></tr>
+<tr><td class="gut"> </td><td>     e.preventDefault();</td></tr>
+<tr class="del"><td class="gut">−</td><td>    const person = { ...form };</td></tr>
+<tr class="add"><td class="gut">+</td><td>    // An empty date is sent as null so the server clears it.</td></tr>
+<tr class="add"><td class="gut">+</td><td>    const person = { ...form, dateOfJoining: form.dateOfJoining || null };</td></tr>
+<tr><td class="gut"> </td><td>     try {</td></tr>
+<tr><td class="gut"> </td><td>       let response;</td></tr>
+<tr><td class="gut"> </td><td>       if (isNew) {</td></tr>
+<tr class="hunk"><td class="gut">…</td><td>@@ -84,7 +90,7 @@ export default function Record() {</td></tr>
+<tr><td class="gut"> </td><td>     } catch (error) {</td></tr>
+<tr><td class="gut"> </td><td>       console.error('A problem occurred adding or updating a record: ', error);</td></tr>
+<tr><td class="gut"> </td><td>     } finally {</td></tr>
+<tr class="del"><td class="gut">−</td><td>      setForm({ name: "", position: "", level: "" });</td></tr>
+<tr class="add"><td class="gut">+</td><td>      setForm({ name: "", position: "", level: "", dateOfJoining: "" });</td></tr>
+<tr><td class="gut"> </td><td>       navigate("/");</td></tr>
+<tr><td class="gut"> </td><td>     }</td></tr>
+<tr><td class="gut"> </td><td>   }</td></tr>
+<tr class="hunk"><td class="gut">…</td><td>@@ -122,6 +128,8 @@ export default function Record() {</td></tr>
+<tr><td class="gut"> </td><td>                     type="text"</td></tr>
+<tr><td class="gut"> </td><td>                     name="name"</td></tr>
+<tr><td class="gut"> </td><td>                     id="name"</td></tr>
+<tr class="add"><td class="gut">+</td><td>                    data-testid="record-name-input"</td></tr>
+<tr class="add"><td class="gut">+</td><td>                    required</td></tr>
+<tr><td class="gut"> </td><td>                     className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-slate-900 placeholder:text-slate-400 focus:ring-0 sm:text-sm sm:leading-6"</td></tr>
+<tr><td class="gut"> </td><td>                     placeholder="First Last"</td></tr>
+<tr><td class="gut"> </td><td>                     value={form.name}</td></tr>
+<tr class="hunk"><td class="gut">…</td><td>@@ -143,6 +151,7 @@ export default function Record() {</td></tr>
+<tr><td class="gut"> </td><td>                     type="text"</td></tr>
+<tr><td class="gut"> </td><td>                     name="position"</td></tr>
+<tr><td class="gut"> </td><td>                     id="position"</td></tr>
+<tr class="add"><td class="gut">+</td><td>                    data-testid="record-position-input"</td></tr>
+<tr><td class="gut"> </td><td>                     className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-slate-900 placeholder:text-slate-400 focus:ring-0 sm:text-sm sm:leading-6"</td></tr>
+<tr><td class="gut"> </td><td>                     placeholder="Developer Advocate"</td></tr>
+<tr><td class="gut"> </td><td>                     value={form.position}</td></tr>
+<tr class="hunk"><td class="gut">…</td><td>@@ -151,6 +160,27 @@ export default function Record() {</td></tr>
+<tr><td class="gut"> </td><td>                 &lt;/div&gt;</td></tr>
+<tr><td class="gut"> </td><td>               &lt;/div&gt;</td></tr>
+<tr><td class="gut"> </td><td>             &lt;/div&gt;</td></tr>
+<tr class="add"><td class="gut">+</td><td>            &lt;div className="sm:col-span-4"&gt;</td></tr>
+<tr class="add"><td class="gut">+</td><td>              &lt;label</td></tr>
+<tr class="add"><td class="gut">+</td><td>                htmlFor="dateOfJoining"</td></tr>
+<tr class="add"><td class="gut">+</td><td>                className="block text-sm font-medium leading-6 text-slate-900"</td></tr>
+<tr class="add"><td class="gut">+</td><td>              &gt;</td></tr>
+<tr class="add"><td class="gut">+</td><td>                Date of Joining</td></tr>
+<tr class="add"><td class="gut">+</td><td>              &lt;/label&gt;</td></tr>
+<tr class="add"><td class="gut">+</td><td>              &lt;div className="mt-2"&gt;</td></tr>
+<tr class="add"><td class="gut">+</td><td>                &lt;div className="flex rounded-md shadow-sm ring-1 ring-inset ring-slate-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md"&gt;</td></tr>
+<tr class="add"><td class="gut">+</td><td>                  &lt;input</td></tr>
+<tr class="add"><td class="gut">+</td><td>                    type="date"</td></tr>
+<tr class="add"><td class="gut">+</td><td>                    name="dateOfJoining"</td></tr>
+<tr class="add"><td class="gut">+</td><td>                    id="dateOfJoining"</td></tr>
+<tr class="add"><td class="gut">+</td><td>                    data-testid="record-date-of-joining-input"</td></tr>
+<tr class="add"><td class="gut">+</td><td>                    className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-slate-900 placeholder:text-slate-400 focus:ring-0 sm:text-sm sm:leading-6"</td></tr>
+<tr class="add"><td class="gut">+</td><td>                    value={form.dateOfJoining}</td></tr>
+<tr class="add"><td class="gut">+</td><td>                    onChange={(e) =&gt; updateForm({ dateOfJoining: e.target.value })}</td></tr>
+<tr class="add"><td class="gut">+</td><td>                  /&gt;</td></tr>
+<tr class="add"><td class="gut">+</td><td>                &lt;/div&gt;</td></tr>
+<tr class="add"><td class="gut">+</td><td>              &lt;/div&gt;</td></tr>
+<tr class="add"><td class="gut">+</td><td>            &lt;/div&gt;</td></tr>
+<tr><td class="gut"> </td><td>             &lt;div&gt;</td></tr>
+<tr><td class="gut"> </td><td>               &lt;fieldset className="mt-4"&gt;</td></tr>
+<tr><td class="gut"> </td><td>                 &lt;legend className="sr-only"&gt;Position Options&lt;/legend&gt;</td></tr>
+<tr class="hunk"><td class="gut">…</td><td>@@ -158,6 +188,7 @@ export default function Record() {</td></tr>
+<tr><td class="gut"> </td><td>                   &lt;div className="flex items-center"&gt;</td></tr>
+<tr><td class="gut"> </td><td>                     &lt;input</td></tr>
+<tr><td class="gut"> </td><td>                       id="positionIntern"</td></tr>
+<tr class="add"><td class="gut">+</td><td>                      data-testid="record-level-intern"</td></tr>
+<tr><td class="gut"> </td><td>                       name="positionOptions"</td></tr>
+<tr><td class="gut"> </td><td>                       type="radio"</td></tr>
+<tr><td class="gut"> </td><td>                       value="Intern"</td></tr>
+<tr class="hunk"><td class="gut">…</td><td>@@ -173,6 +204,7 @@ export default function Record() {</td></tr>
+<tr><td class="gut"> </td><td>                     &lt;/label&gt;</td></tr>
+<tr><td class="gut"> </td><td>                     &lt;input</td></tr>
+<tr><td class="gut"> </td><td>                       id="positionJunior"</td></tr>
+<tr class="add"><td class="gut">+</td><td>                      data-testid="record-level-junior"</td></tr>
+<tr><td class="gut"> </td><td>                       name="positionOptions"</td></tr>
+<tr><td class="gut"> </td><td>                       type="radio"</td></tr>
+<tr><td class="gut"> </td><td>                       value="Junior"</td></tr>
+<tr class="hunk"><td class="gut">…</td><td>@@ -188,6 +220,7 @@ export default function Record() {</td></tr>
+<tr><td class="gut"> </td><td>                     &lt;/label&gt;</td></tr>
+<tr><td class="gut"> </td><td>                     &lt;input</td></tr>
+<tr><td class="gut"> </td><td>                       id="positionSenior"</td></tr>
+<tr class="add"><td class="gut">+</td><td>                      data-testid="record-level-senior"</td></tr>
+<tr><td class="gut"> </td><td>                       name="positionOptions"</td></tr>
+<tr><td class="gut"> </td><td>                       type="radio"</td></tr>
+<tr><td class="gut"> </td><td>                       value="Senior"</td></tr>
+<tr class="hunk"><td class="gut">…</td><td>@@ -209,6 +242,7 @@ export default function Record() {</td></tr>
+<tr><td class="gut"> </td><td>         &lt;/div&gt;</td></tr>
+<tr><td class="gut"> </td><td>         &lt;input</td></tr>
+<tr><td class="gut"> </td><td>           type="submit"</td></tr>
+<tr class="add"><td class="gut">+</td><td>          data-testid="record-submit"</td></tr>
+<tr><td class="gut"> </td><td>           value="Save Employee Record"</td></tr>
+<tr><td class="gut"> </td><td>           className="inline-flex items-center justify-center whitespace-nowrap text-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-slate-100 hover:text-accent-foreground h-9 rounded-md px-3 cursor-pointer mt-4"</td></tr>
+<tr><td class="gut"> </td><td>         /&gt;</td></tr>
+</tbody></table></div>
+<div class="diff"><div class="diff-file">mern/client/src/components/RecordList.jsx</div><table><tbody>
+<tr class="hunk"><td class="gut">…</td><td>@@ -11,7 +11,11 @@ function displayLevel(level) {</td></tr>
+<tr><td class="gut"> </td><td> }</td></tr>
+<tr><td class="gut"> </td><td> </td></tr>
+<tr><td class="gut"> </td><td> const Record = (props) =&gt; (</td></tr>
+<tr class="del"><td class="gut">−</td><td>  &lt;tr className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted"&gt;</td></tr>
+<tr class="add"><td class="gut">+</td><td>  &lt;tr</td></tr>
+<tr class="add"><td class="gut">+</td><td>    data-testid="record-row"</td></tr>
+<tr class="add"><td class="gut">+</td><td>    data-record-id={props.record._id}</td></tr>
+<tr class="add"><td class="gut">+</td><td>    className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted"</td></tr>
+<tr class="add"><td class="gut">+</td><td>  &gt;</td></tr>
+<tr><td class="gut"> </td><td>     &lt;td className="p-4 align-middle [&amp;amp;:has([role=checkbox])]:pr-0"&gt;</td></tr>
+<tr><td class="gut"> </td><td>       {props.record.name}</td></tr>
+<tr><td class="gut"> </td><td>     &lt;/td&gt;</td></tr>
+<tr class="hunk"><td class="gut">…</td><td>@@ -21,15 +25,27 @@ const Record = (props) =&gt; (</td></tr>
+<tr><td class="gut"> </td><td>     &lt;td className="p-4 align-middle [&amp;amp;:has([role=checkbox])]:pr-0"&gt;</td></tr>
+<tr><td class="gut"> </td><td>       {displayLevel(props.record.level)}</td></tr>
+<tr><td class="gut"> </td><td>     &lt;/td&gt;</td></tr>
+<tr class="add"><td class="gut">+</td><td>    &lt;td</td></tr>
+<tr class="add"><td class="gut">+</td><td>      data-testid="record-date-of-joining"</td></tr>
+<tr class="add"><td class="gut">+</td><td>      className="p-4 align-middle [&amp;amp;:has([role=checkbox])]:pr-0"</td></tr>
+<tr class="add"><td class="gut">+</td><td>    &gt;</td></tr>
+<tr class="add"><td class="gut">+</td><td>      {/* Stored as "YYYY-MM-DD" and shown as-is, so no timezone or locale can shift it.</td></tr>
+<tr class="add"><td class="gut">+</td><td>          No date renders a blank cell that is still addressable. */}</td></tr>
+<tr class="add"><td class="gut">+</td><td>      {props.record.dateOfJoining || (</td></tr>
+<tr class="add"><td class="gut">+</td><td>        &lt;span data-testid="record-date-of-joining-empty"&gt;&lt;/span&gt;</td></tr>
+<tr class="add"><td class="gut">+</td><td>      )}</td></tr>
+<tr class="add"><td class="gut">+</td><td>    &lt;/td&gt;</td></tr>
+<tr><td class="gut"> </td><td>     &lt;td className="p-4 align-middle [&amp;amp;:has([role=checkbox])]:pr-0"&gt;</td></tr>
+<tr><td class="gut"> </td><td>       &lt;div className="flex gap-2"&gt;</td></tr>
+<tr><td class="gut"> </td><td>         &lt;Link</td></tr>
+<tr class="add"><td class="gut">+</td><td>          data-testid="record-edit"</td></tr>
+<tr><td class="gut"> </td><td>           className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-slate-100 h-9 rounded-md px-3"</td></tr>
+<tr><td class="gut"> </td><td>           to={`/edit/${props.record._id}`}</td></tr>
+<tr><td class="gut"> </td><td>         &gt;</td></tr>
+<tr><td class="gut"> </td><td>           Edit</td></tr>
+<tr><td class="gut"> </td><td>         &lt;/Link&gt;</td></tr>
+<tr><td class="gut"> </td><td>         &lt;button</td></tr>
+<tr class="add"><td class="gut">+</td><td>          data-testid="record-delete"</td></tr>
+<tr><td class="gut"> </td><td>           className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-slate-100 hover:text-accent-foreground h-9 rounded-md px-3"</td></tr>
+<tr><td class="gut"> </td><td>           color="red"</td></tr>
+<tr><td class="gut"> </td><td>           type="button"</td></tr>
+<tr class="hunk"><td class="gut">…</td><td>@@ -91,7 +107,7 @@ export default function RecordList() {</td></tr>
+<tr><td class="gut"> </td><td>       &lt;h3 className="text-lg font-semibold p-4"&gt;Employee Records&lt;/h3&gt;</td></tr>
+<tr><td class="gut"> </td><td>       &lt;div className="border rounded-lg overflow-hidden"&gt;</td></tr>
+<tr><td class="gut"> </td><td>         &lt;div className="relative w-full overflow-auto"&gt;</td></tr>
+<tr class="del"><td class="gut">−</td><td>          &lt;table className="w-full caption-bottom text-sm"&gt;</td></tr>
+<tr class="add"><td class="gut">+</td><td>          &lt;table data-testid="record-list" className="w-full caption-bottom text-sm"&gt;</td></tr>
+<tr><td class="gut"> </td><td>             &lt;thead className="[&amp;amp;_tr]:border-b"&gt;</td></tr>
+<tr><td class="gut"> </td><td>               &lt;tr className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted"&gt;</td></tr>
+<tr><td class="gut"> </td><td>                 &lt;th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;amp;:has([role=checkbox])]:pr-0"&gt;</td></tr>
+<tr class="hunk"><td class="gut">…</td><td>@@ -103,6 +119,9 @@ export default function RecordList() {</td></tr>
+<tr><td class="gut"> </td><td>                 &lt;th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;amp;:has([role=checkbox])]:pr-0"&gt;</td></tr>
+<tr><td class="gut"> </td><td>                   Level</td></tr>
+<tr><td class="gut"> </td><td>                 &lt;/th&gt;</td></tr>
+<tr class="add"><td class="gut">+</td><td>                &lt;th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;amp;:has([role=checkbox])]:pr-0"&gt;</td></tr>
+<tr class="add"><td class="gut">+</td><td>                  Date of Joining</td></tr>
+<tr class="add"><td class="gut">+</td><td>                &lt;/th&gt;</td></tr>
+<tr><td class="gut"> </td><td>                 &lt;th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;amp;:has([role=checkbox])]:pr-0"&gt;</td></tr>
+<tr><td class="gut"> </td><td>                   Action</td></tr>
+<tr><td class="gut"> </td><td>                 &lt;/th&gt;</td></tr>
+</tbody></table></div>
+<div class="diff"><div class="diff-file">mern/server/routes/record.js</div><table><tbody>
+<tr class="hunk"><td class="gut">…</td><td>@@ -11,74 +11,138 @@ import { ObjectId } from "mongodb";</td></tr>
+<tr><td class="gut"> </td><td> // The router will be added as a middleware and will take control of requests starting with path /record.</td></tr>
+<tr><td class="gut"> </td><td> const router = express.Router();</td></tr>
+<tr><td class="gut"> </td><td> </td></tr>
+<tr class="add"><td class="gut">+</td><td>// Error envelope: tests assert on `code` and `field`, never on `message`.</td></tr>
+<tr class="add"><td class="gut">+</td><td>export const fieldError = (code, field, message) =&gt; ({ error: { code, field, message } });</td></tr>
+<tr class="add"><td class="gut">+</td><td> </td></tr>
+<tr class="add"><td class="gut">+</td><td>// Wraps an async handler so a throw becomes a 500 envelope instead of an</td></tr>
+<tr class="add"><td class="gut">+</td><td>// unhandled rejection that takes the process down.</td></tr>
+<tr class="add"><td class="gut">+</td><td>const handle = (fn) =&gt; async (req, res) =&gt; {</td></tr>
+<tr class="add"><td class="gut">+</td><td>  try {</td></tr>
+<tr class="add"><td class="gut">+</td><td>    await fn(req, res);</td></tr>
+<tr class="add"><td class="gut">+</td><td>  } catch (err) {</td></tr>
+<tr class="add"><td class="gut">+</td><td>    console.error(err);</td></tr>
+<tr class="add"><td class="gut">+</td><td>    if (!res.headersSent) {</td></tr>
+<tr class="add"><td class="gut">+</td><td>      res.status(500).json(fieldError("INTERNAL_ERROR", undefined, "Unexpected server error"));</td></tr>
+<tr class="add"><td class="gut">+</td><td>    }</td></tr>
+<tr class="add"><td class="gut">+</td><td>  }</td></tr>
+<tr class="add"><td class="gut">+</td><td>};</td></tr>
+<tr class="add"><td class="gut">+</td><td> </td></tr>
+<tr class="add"><td class="gut">+</td><td>// A date of joining is a calendar date, not an instant, so it is stored as the</td></tr>
+<tr class="add"><td class="gut">+</td><td>// plain "YYYY-MM-DD" string. That keeps it free of timezone shifts.</td></tr>
+<tr class="add"><td class="gut">+</td><td>function isIsoDate(value) {</td></tr>
+<tr class="add"><td class="gut">+</td><td>  if (typeof value !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;</td></tr>
+<tr class="add"><td class="gut">+</td><td>  const parsed = new Date(`${value}T00:00:00Z`);</td></tr>
+<tr class="add"><td class="gut">+</td><td>  return !Number.isNaN(parsed.getTime()) &amp;&amp; parsed.toISOString().slice(0, 10) === value;</td></tr>
+<tr class="add"><td class="gut">+</td><td>}</td></tr>
+<tr class="add"><td class="gut">+</td><td> </td></tr>
+<tr class="add"><td class="gut">+</td><td>// Validates a create (partial = false) or update (partial = true) body.</td></tr>
+<tr class="add"><td class="gut">+</td><td>// Returns an error envelope, or null when the body is valid.</td></tr>
+<tr class="add"><td class="gut">+</td><td>function validateRecord(body, { partial }) {</td></tr>
+<tr class="add"><td class="gut">+</td><td>  if (typeof body !== "object" || body === null || Array.isArray(body)) {</td></tr>
+<tr class="add"><td class="gut">+</td><td>    return fieldError("VALIDATION_FAILED", undefined, "request body must be a JSON object");</td></tr>
+<tr class="add"><td class="gut">+</td><td>  }</td></tr>
+<tr class="add"><td class="gut">+</td><td>  if (!partial || body.name !== undefined) {</td></tr>
+<tr class="add"><td class="gut">+</td><td>    if (typeof body.name !== "string" || body.name.trim() === "") {</td></tr>
+<tr class="add"><td class="gut">+</td><td>      return fieldError("VALIDATION_FAILED", "name", "name is required");</td></tr>
+<tr class="add"><td class="gut">+</td><td>    }</td></tr>
+<tr class="add"><td class="gut">+</td><td>  }</td></tr>
+<tr class="add"><td class="gut">+</td><td>  // null is treated as absent: legacy records store missing fields as null and</td></tr>
+<tr class="add"><td class="gut">+</td><td>  // the edit form sends them straight back.</td></tr>
+<tr class="add"><td class="gut">+</td><td>  for (const field of ["position", "level"]) {</td></tr>
+<tr class="add"><td class="gut">+</td><td>    if (body[field] != null &amp;&amp; typeof body[field] !== "string") {</td></tr>
+<tr class="add"><td class="gut">+</td><td>      return fieldError("VALIDATION_FAILED", field, `${field} must be a string`);</td></tr>
+<tr class="add"><td class="gut">+</td><td>    }</td></tr>
+<tr class="add"><td class="gut">+</td><td>  }</td></tr>
+<tr class="add"><td class="gut">+</td><td>  const date = body.dateOfJoining;</td></tr>
+<tr class="add"><td class="gut">+</td><td>  if (date !== undefined &amp;&amp; date !== null &amp;&amp; date !== "" &amp;&amp; !isIsoDate(date)) {</td></tr>
+<tr class="add"><td class="gut">+</td><td>    return fieldError("VALIDATION_FAILED", "dateOfJoining", "dateOfJoining must be an ISO 8601 date (YYYY-MM-DD)");</td></tr>
+<tr class="add"><td class="gut">+</td><td>  }</td></tr>
+<tr class="add"><td class="gut">+</td><td>  return null;</td></tr>
+<tr class="add"><td class="gut">+</td><td>}</td></tr>
+<tr class="add"><td class="gut">+</td><td> </td></tr>
+<tr class="add"><td class="gut">+</td><td>const invalidId = () =&gt; fieldError("INVALID_ID", "id", "id must be a 24-character hex string");</td></tr>
+<tr class="add"><td class="gut">+</td><td>const notFound = () =&gt; fieldError("NOT_FOUND", "id", "record not found");</td></tr>
+<tr class="add"><td class="gut">+</td><td> </td></tr>
+<tr><td class="gut"> </td><td> // This section will help you get a list of all the records.</td></tr>
+<tr class="del"><td class="gut">−</td><td>router.get("/", async (req, res) =&gt; {</td></tr>
+<tr class="add"><td class="gut">+</td><td>router.get("/", handle(async (req, res) =&gt; {</td></tr>
+<tr><td class="gut"> </td><td>   let collection = await db.collection("records");</td></tr>
+<tr><td class="gut"> </td><td>   let results = await collection.find({}).toArray();</td></tr>
+<tr class="del"><td class="gut">−</td><td>  res.send(results).status(200);</td></tr>
+<tr class="del"><td class="gut">−</td><td>});</td></tr>
+<tr class="add"><td class="gut">+</td><td>  res.status(200).json(results);</td></tr>
+<tr class="add"><td class="gut">+</td><td>}));</td></tr>
+<tr><td class="gut"> </td><td> </td></tr>
+<tr><td class="gut"> </td><td> // This section will help you get a single record by id</td></tr>
+<tr class="del"><td class="gut">−</td><td>router.get("/:id", async (req, res) =&gt; {</td></tr>
+<tr class="add"><td class="gut">+</td><td>router.get("/:id", handle(async (req, res) =&gt; {</td></tr>
+<tr class="add"><td class="gut">+</td><td>  if (!ObjectId.isValid(req.params.id)) return res.status(400).json(invalidId());</td></tr>
+<tr class="add"><td class="gut">+</td><td> </td></tr>
+<tr><td class="gut"> </td><td>   let collection = await db.collection("records");</td></tr>
+<tr><td class="gut"> </td><td>   let query = { _id: new ObjectId(req.params.id) };</td></tr>
+<tr><td class="gut"> </td><td>   let result = await collection.findOne(query);</td></tr>
+<tr><td class="gut"> </td><td> </td></tr>
+<tr class="del"><td class="gut">−</td><td>  if (!result) res.send("Not found").status(404);</td></tr>
+<tr class="del"><td class="gut">−</td><td>  else res.send(result).status(200);</td></tr>
+<tr class="del"><td class="gut">−</td><td>});</td></tr>
+<tr class="add"><td class="gut">+</td><td>  if (!result) return res.status(404).json(notFound());</td></tr>
+<tr class="add"><td class="gut">+</td><td>  res.status(200).json(result);</td></tr>
+<tr class="add"><td class="gut">+</td><td>}));</td></tr>
+<tr><td class="gut"> </td><td> </td></tr>
+<tr><td class="gut"> </td><td> // This section will help you create a new record.</td></tr>
+<tr class="del"><td class="gut">−</td><td>router.post("/", async (req, res) =&gt; {</td></tr>
+<tr class="del"><td class="gut">−</td><td>  try {</td></tr>
+<tr class="del"><td class="gut">−</td><td>    let newDocument = {</td></tr>
+<tr class="del"><td class="gut">−</td><td>      name: req.body.name,</td></tr>
+<tr class="del"><td class="gut">−</td><td>      position: req.body.position,</td></tr>
+<tr class="del"><td class="gut">−</td><td>      level: req.body.level,</td></tr>
+<tr class="del"><td class="gut">−</td><td>    };</td></tr>
+<tr class="del"><td class="gut">−</td><td>    let collection = await db.collection("records");</td></tr>
+<tr class="del"><td class="gut">−</td><td>    let result = await collection.insertOne(newDocument);</td></tr>
+<tr class="del"><td class="gut">−</td><td>    res.send(result).status(204);</td></tr>
+<tr class="del"><td class="gut">−</td><td>  } catch (err) {</td></tr>
+<tr class="del"><td class="gut">−</td><td>    console.error(err);</td></tr>
+<tr class="del"><td class="gut">−</td><td>    res.status(500).send("Error adding record");</td></tr>
+<tr class="del"><td class="gut">−</td><td>  }</td></tr>
+<tr class="del"><td class="gut">−</td><td>});</td></tr>
+<tr class="add"><td class="gut">+</td><td>router.post("/", handle(async (req, res) =&gt; {</td></tr>
+<tr class="add"><td class="gut">+</td><td>  const body = req.body ?? {};</td></tr>
+<tr class="add"><td class="gut">+</td><td>  const invalid = validateRecord(body, { partial: false });</td></tr>
+<tr class="add"><td class="gut">+</td><td>  if (invalid) return res.status(400).json(invalid);</td></tr>
+<tr class="add"><td class="gut">+</td><td> </td></tr>
+<tr class="add"><td class="gut">+</td><td>  let newDocument = {</td></tr>
+<tr class="add"><td class="gut">+</td><td>    name: body.name,</td></tr>
+<tr class="add"><td class="gut">+</td><td>    position: body.position ?? "",</td></tr>
+<tr class="add"><td class="gut">+</td><td>    level: body.level ?? "",</td></tr>
+<tr class="add"><td class="gut">+</td><td>  };</td></tr>
+<tr class="add"><td class="gut">+</td><td>  if (body.dateOfJoining) newDocument.dateOfJoining = body.dateOfJoining;</td></tr>
+<tr class="add"><td class="gut">+</td><td> </td></tr>
+<tr class="add"><td class="gut">+</td><td>  let collection = await db.collection("records");</td></tr>
+<tr class="add"><td class="gut">+</td><td>  let result = await collection.insertOne(newDocument);</td></tr>
+<tr class="add"><td class="gut">+</td><td>  res.status(201).json({ _id: result.insertedId, ...newDocument });</td></tr>
+<tr class="add"><td class="gut">+</td><td>}));</td></tr>
+<tr><td class="gut"> </td><td> </td></tr>
+<tr><td class="gut"> </td><td> // This section will help you update a record by id.</td></tr>
+<tr class="del"><td class="gut">−</td><td>router.patch("/:id", async (req, res) =&gt; {</td></tr>
+<tr class="del"><td class="gut">−</td><td>  try {</td></tr>
+<tr class="del"><td class="gut">−</td><td>    const query = { _id: new ObjectId(req.params.id) };</td></tr>
+<tr class="del"><td class="gut">−</td><td>    const updates = {</td></tr>
+<tr class="del"><td class="gut">−</td><td>      $set: {</td></tr>
+<tr class="del"><td class="gut">−</td><td>        name: req.body.name,</td></tr>
+<tr class="del"><td class="gut">−</td><td>        position: req.body.position,</td></tr>
+<tr class="del"><td class="gut">−</td><td>        level: req.body.level,</td></tr>
+<tr class="del"><td class="gut">−</td><td>      },</td></tr>
+<tr class="del"><td class="gut">−</td><td>    };</td></tr>
+<tr class="del"><td class="gut">−</td><td> </td></tr>
+<tr class="del"><td class="gut">−</td><td>    let collection = await db.collection("records");</td></tr>
+<tr class="del"><td class="gut">−</td><td>    let result = await collection.updateOne(query, updates);</td></tr>
+<tr class="del"><td class="gut">−</td><td>    res.send(result).status(200);</td></tr>
+<tr class="del"><td class="gut">−</td><td>  } catch (err) {</td></tr>
+<tr class="del"><td class="gut">−</td><td>    console.error(err);</td></tr>
+<tr class="del"><td class="gut">−</td><td>    res.status(500).send("Error updating record");</td></tr>
+<tr class="add"><td class="gut">+</td><td>router.patch("/:id", handle(async (req, res) =&gt; {</td></tr>
+<tr class="add"><td class="gut">+</td><td>  if (!ObjectId.isValid(req.params.id)) return res.status(400).json(invalidId());</td></tr>
+<tr class="add"><td class="gut">+</td><td> </td></tr>
+<tr class="add"><td class="gut">+</td><td>  const body = req.body ?? {};</td></tr>
+<tr class="add"><td class="gut">+</td><td>  const invalid = validateRecord(body, { partial: true });</td></tr>
+<tr class="add"><td class="gut">+</td><td>  if (invalid) return res.status(400).json(invalid);</td></tr>
+<tr class="add"><td class="gut">+</td><td> </td></tr>
+<tr class="add"><td class="gut">+</td><td>  const $set = {};</td></tr>
+<tr class="add"><td class="gut">+</td><td>  for (const field of ["name", "position", "level"]) {</td></tr>
+<tr class="add"><td class="gut">+</td><td>    if (body[field] != null) $set[field] = body[field];</td></tr>
+<tr class="add"><td class="gut">+</td><td>  }</td></tr>
+<tr class="add"><td class="gut">+</td><td>  // An empty or null date clears it; an absent date leaves it unchanged.</td></tr>
+<tr class="add"><td class="gut">+</td><td>  const updates = {};</td></tr>
+<tr class="add"><td class="gut">+</td><td>  if (body.dateOfJoining) $set.dateOfJoining = body.dateOfJoining;</td></tr>
+<tr class="add"><td class="gut">+</td><td>  else if (body.dateOfJoining === null || body.dateOfJoining === "") {</td></tr>
+<tr class="add"><td class="gut">+</td><td>    updates.$unset = { dateOfJoining: "" };</td></tr>
+<tr><td class="gut"> </td><td>   }</td></tr>
+<tr class="del"><td class="gut">−</td><td>});</td></tr>
+<tr class="add"><td class="gut">+</td><td>  if (Object.keys($set).length) updates.$set = $set;</td></tr>
+<tr class="add"><td class="gut">+</td><td> </td></tr>
+<tr class="add"><td class="gut">+</td><td>  const query = { _id: new ObjectId(req.params.id) };</td></tr>
+<tr class="add"><td class="gut">+</td><td>  let collection = await db.collection("records");</td></tr>
+<tr class="add"><td class="gut">+</td><td>  if (!Object.keys(updates).length) {</td></tr>
+<tr class="add"><td class="gut">+</td><td>    const existing = await collection.findOne(query);</td></tr>
+<tr class="add"><td class="gut">+</td><td>    if (!existing) return res.status(404).json(notFound());</td></tr>
+<tr class="add"><td class="gut">+</td><td>    return res.status(200).json(existing);</td></tr>
+<tr class="add"><td class="gut">+</td><td>  }</td></tr>
+<tr class="add"><td class="gut">+</td><td> </td></tr>
+<tr class="add"><td class="gut">+</td><td>  const result = await collection.findOneAndUpdate(query, updates, { returnDocument: "after" });</td></tr>
+<tr class="add"><td class="gut">+</td><td>  if (!result) return res.status(404).json(notFound());</td></tr>
+<tr class="add"><td class="gut">+</td><td>  res.status(200).json(result);</td></tr>
+<tr class="add"><td class="gut">+</td><td>}));</td></tr>
+<tr><td class="gut"> </td><td> </td></tr>
+<tr><td class="gut"> </td><td> // This section will help you delete a record</td></tr>
+<tr class="del"><td class="gut">−</td><td>router.delete("/:id", async (req, res) =&gt; {</td></tr>
+<tr class="del"><td class="gut">−</td><td>  try {</td></tr>
+<tr class="del"><td class="gut">−</td><td>    const query = { _id: new ObjectId(req.params.id) };</td></tr>
+<tr class="add"><td class="gut">+</td><td>router.delete("/:id", handle(async (req, res) =&gt; {</td></tr>
+<tr class="add"><td class="gut">+</td><td>  if (!ObjectId.isValid(req.params.id)) return res.status(400).json(invalidId());</td></tr>
+<tr><td class="gut"> </td><td> </td></tr>
+<tr class="del"><td class="gut">−</td><td>    const collection = db.collection("records");</td></tr>
+<tr class="del"><td class="gut">−</td><td>    let result = await collection.deleteOne(query);</td></tr>
+<tr class="add"><td class="gut">+</td><td>  const query = { _id: new ObjectId(req.params.id) };</td></tr>
+<tr class="add"><td class="gut">+</td><td>  const collection = db.collection("records");</td></tr>
+<tr class="add"><td class="gut">+</td><td>  let result = await collection.deleteOne(query);</td></tr>
+<tr><td class="gut"> </td><td> </td></tr>
+<tr class="del"><td class="gut">−</td><td>    res.send(result).status(200);</td></tr>
+<tr class="del"><td class="gut">−</td><td>  } catch (err) {</td></tr>
+<tr class="del"><td class="gut">−</td><td>    console.error(err);</td></tr>
+<tr class="del"><td class="gut">−</td><td>    res.status(500).send("Error deleting record");</td></tr>
+<tr class="del"><td class="gut">−</td><td>  }</td></tr>
+<tr class="del"><td class="gut">−</td><td>});</td></tr>
+<tr class="add"><td class="gut">+</td><td>  if (result.deletedCount === 0) return res.status(404).json(notFound());</td></tr>
+<tr class="add"><td class="gut">+</td><td>  res.status(204).end();</td></tr>
+<tr class="add"><td class="gut">+</td><td>}));</td></tr>
+<tr><td class="gut"> </td><td> </td></tr>
+<tr><td class="gut"> </td><td> export default router;</td></tr>
+<tr><td class="gut"> </td><td> </td></tr>
+</tbody></table></div>
+    </details>
+  </section>
+
+  <section>
+    <h2><span class="num">06 / After</span>The same three commands</h2>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr><th class="mono">request</th><th>control</th><th>with rule book</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="mono">GET /record/not-an-objectid</td>
+            <td><span class="status dead">process exits</span></td>
+            <td><span class="status good">400</span> <code>INVALID_ID</code> / <code>id</code>, API stays up</td>
+          </tr>
+          <tr>
+            <td class="mono">POST /record &nbsp;{}</td>
+            <td><span class="status bad">200</span> record created</td>
+            <td><span class="status good">400</span> <code>VALIDATION_FAILED</code> / <code>name</code></td>
+          </tr>
+          <tr>
+            <td class="mono">POST &nbsp;dateOfJoining:&nbsp;"not-a-date"</td>
+            <td><span class="status bad">200</span> stored, then rendered raw</td>
+            <td><span class="status good">400</span> <code>VALIDATION_FAILED</code> / <code>dateOfJoining</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <pre class="term">$ curl -i http://localhost:5050/record/not-an-objectid
+<span class="k">HTTP/1.1 400 Bad Request</span>
+{"error":{"code":"INVALID_ID","field":"id","message":"id must be a 24-character hex string"}}
+
+$ curl -o /dev/null -w "%{http_code}\n" http://localhost:5050/record
+<span class="k">200</span>   <span class="f"># still serving</span></pre>
+  </section>
+
+  <section>
+    <h2><span class="num">07 / Consequence</span>Then it wrote the tests</h2>
+    <p>Unprompted, the treatment run added a twelve-test suite for the behaviour it had created:
+      invalid date formats, clearing the field, the empty state, and a full form round-trip. Each
+      test creates its own records over the API and cleans up after itself, so it depends on no
+      shared state and runs in any order.</p>
+
+    <div class="contrast">
+      <div class="panel">
+        <h4>The suite this repository already had</h4>
+        <pre>await row.getByText("Delete").click();</pre>
+      </div>
+      <div class="panel">
+        <h4>What the agent wrote once hooks existed</h4>
+        <pre>page.locator(
+  `[data-testid="record-row"]` +
+  `[data-record-id="${record._id}"]`
+)</pre>
+      </div>
+    </div>
+
+    <p style="margin-top:20px">Same model, same author. The difference is entirely what the
+      application gave it to work with. It added a test file and never edited the ones written in
+      advance &mdash; the gate fails any diff that does.</p>
+
+    <details>
+      <summary>View the twelve tests the agent wrote</summary>
+      <div class="diff"><div class="diff-file">mern/client/e2e/date-of-joining.spec.js</div><table><tbody><tr><td class="gut">1</td><td>import { test, expect } from "@playwright/test";</td></tr>
+<tr><td class="gut">2</td><td> </td></tr>
+<tr><td class="gut">3</td><td>// Date of Joining.</td></tr>
+<tr><td class="gut">4</td><td>//</td></tr>
+<tr><td class="gut">5</td><td>// Stored and returned as a "YYYY-MM-DD" calendar date, optional, and rendered</td></tr>
+<tr><td class="gut">6</td><td>// as a blank but addressable cell when unset. Each test creates its own</td></tr>
+<tr><td class="gut">7</td><td>// records over the API, finds rows by record id, and cleans up after itself.</td></tr>
+<tr><td class="gut">8</td><td> </td></tr>
+<tr><td class="gut">9</td><td>const API = "http://localhost:5050";</td></tr>
+<tr><td class="gut">10</td><td> </td></tr>
+<tr><td class="gut">11</td><td>const created = [];</td></tr>
+<tr><td class="gut">12</td><td> </td></tr>
+<tr><td class="gut">13</td><td>async function createRecord(request, data) {</td></tr>
+<tr><td class="gut">14</td><td>  const res = await request.post(`${API}/record`, {</td></tr>
+<tr><td class="gut">15</td><td>    data: { name: "DOJ Test", position: "QA Engineer", level: "Junior", ...data },</td></tr>
+<tr><td class="gut">16</td><td>  });</td></tr>
+<tr><td class="gut">17</td><td>  expect(res.status()).toBe(201);</td></tr>
+<tr><td class="gut">18</td><td>  const body = await res.json();</td></tr>
+<tr><td class="gut">19</td><td>  created.push(body._id);</td></tr>
+<tr><td class="gut">20</td><td>  return body;</td></tr>
+<tr><td class="gut">21</td><td>}</td></tr>
+<tr><td class="gut">22</td><td> </td></tr>
+<tr><td class="gut">23</td><td>test.afterEach(async ({ request }) =&gt; {</td></tr>
+<tr><td class="gut">24</td><td>  while (created.length) await request.delete(`${API}/record/${created.pop()}`);</td></tr>
+<tr><td class="gut">25</td><td>});</td></tr>
+<tr><td class="gut">26</td><td> </td></tr>
+<tr><td class="gut">27</td><td>test("POST stores dateOfJoining and returns it", async ({ request }) =&gt; {</td></tr>
+<tr><td class="gut">28</td><td>  const record = await createRecord(request, { dateOfJoining: "2024-03-15" });</td></tr>
+<tr><td class="gut">29</td><td>  expect(record).toHaveProperty("dateOfJoining", "2024-03-15");</td></tr>
+<tr><td class="gut">30</td><td> </td></tr>
+<tr><td class="gut">31</td><td>  const fetched = await (await request.get(`${API}/record/${record._id}`)).json();</td></tr>
+<tr><td class="gut">32</td><td>  expect(fetched).toHaveProperty("dateOfJoining", "2024-03-15");</td></tr>
+<tr><td class="gut">33</td><td>});</td></tr>
+<tr><td class="gut">34</td><td> </td></tr>
+<tr><td class="gut">35</td><td>test("dateOfJoining is optional", async ({ request }) =&gt; {</td></tr>
+<tr><td class="gut">36</td><td>  const record = await createRecord(request, {});</td></tr>
+<tr><td class="gut">37</td><td>  expect(record).not.toHaveProperty("dateOfJoining");</td></tr>
+<tr><td class="gut">38</td><td>});</td></tr>
+<tr><td class="gut">39</td><td> </td></tr>
+<tr><td class="gut">40</td><td>for (const bad of ["15/03/2024", "2024-02-30", "2024-3-5", 20240315]) {</td></tr>
+<tr><td class="gut">41</td><td>  test(`POST rejects dateOfJoining ${JSON.stringify(bad)} with a field error`, async ({ request }) =&gt; {</td></tr>
+<tr><td class="gut">42</td><td>    const before = (await (await request.get(`${API}/record`)).json()).length;</td></tr>
+<tr><td class="gut">43</td><td> </td></tr>
+<tr><td class="gut">44</td><td>    const res = await request.post(`${API}/record`, {</td></tr>
+<tr><td class="gut">45</td><td>      data: { name: "DOJ Invalid", position: "QA", level: "Junior", dateOfJoining: bad },</td></tr>
+<tr><td class="gut">46</td><td>    });</td></tr>
+<tr><td class="gut">47</td><td>    expect(res.status()).toBe(400);</td></tr>
+<tr><td class="gut">48</td><td>    const body = await res.json();</td></tr>
+<tr><td class="gut">49</td><td>    expect(body).toHaveProperty("error.code", "VALIDATION_FAILED");</td></tr>
+<tr><td class="gut">50</td><td>    expect(body).toHaveProperty("error.field", "dateOfJoining");</td></tr>
+<tr><td class="gut">51</td><td> </td></tr>
+<tr><td class="gut">52</td><td>    const after = (await (await request.get(`${API}/record`)).json()).length;</td></tr>
+<tr><td class="gut">53</td><td>    expect(after, "invalid POST must not create a record").toBe(before);</td></tr>
+<tr><td class="gut">54</td><td>  });</td></tr>
+<tr><td class="gut">55</td><td>}</td></tr>
+<tr><td class="gut">56</td><td> </td></tr>
+<tr><td class="gut">57</td><td>test("PATCH rejects an invalid dateOfJoining with a field error", async ({ request }) =&gt; {</td></tr>
+<tr><td class="gut">58</td><td>  const record = await createRecord(request, { dateOfJoining: "2024-03-15" });</td></tr>
+<tr><td class="gut">59</td><td>  const res = await request.patch(`${API}/record/${record._id}`, {</td></tr>
+<tr><td class="gut">60</td><td>    data: { dateOfJoining: "not-a-date" },</td></tr>
+<tr><td class="gut">61</td><td>  });</td></tr>
+<tr><td class="gut">62</td><td>  expect(res.status()).toBe(400);</td></tr>
+<tr><td class="gut">63</td><td>  expect(await res.json()).toHaveProperty("error.field", "dateOfJoining");</td></tr>
+<tr><td class="gut">64</td><td>});</td></tr>
+<tr><td class="gut">65</td><td> </td></tr>
+<tr><td class="gut">66</td><td>test("PATCH with a null dateOfJoining clears it", async ({ request }) =&gt; {</td></tr>
+<tr><td class="gut">67</td><td>  const record = await createRecord(request, { dateOfJoining: "2024-03-15" });</td></tr>
+<tr><td class="gut">68</td><td>  const res = await request.patch(`${API}/record/${record._id}`, {</td></tr>
+<tr><td class="gut">69</td><td>    data: { dateOfJoining: null },</td></tr>
+<tr><td class="gut">70</td><td>  });</td></tr>
+<tr><td class="gut">71</td><td>  expect(res.status()).toBe(200);</td></tr>
+<tr><td class="gut">72</td><td>  expect(await res.json()).not.toHaveProperty("dateOfJoining");</td></tr>
+<tr><td class="gut">73</td><td>});</td></tr>
+<tr><td class="gut">74</td><td> </td></tr>
+<tr><td class="gut">75</td><td>test("the list shows the date for a record that has one", async ({ page, request }) =&gt; {</td></tr>
+<tr><td class="gut">76</td><td>  const record = await createRecord(request, { dateOfJoining: "2024-03-15" });</td></tr>
+<tr><td class="gut">77</td><td>  await page.goto("/");</td></tr>
+<tr><td class="gut">78</td><td>  const row = page.locator(`[data-testid="record-row"][data-record-id="${record._id}"]`);</td></tr>
+<tr><td class="gut">79</td><td>  await expect(row.getByTestId("record-date-of-joining")).toHaveText("2024-03-15");</td></tr>
+<tr><td class="gut">80</td><td>  await expect(row.getByTestId("record-date-of-joining-empty")).toHaveCount(0);</td></tr>
+<tr><td class="gut">81</td><td>});</td></tr>
+<tr><td class="gut">82</td><td> </td></tr>
+<tr><td class="gut">83</td><td>test("the list leaves the cell blank for a record with no date", async ({ page, request }) =&gt; {</td></tr>
+<tr><td class="gut">84</td><td>  const record = await createRecord(request, {});</td></tr>
+<tr><td class="gut">85</td><td>  await page.goto("/");</td></tr>
+<tr><td class="gut">86</td><td>  const row = page.locator(`[data-testid="record-row"][data-record-id="${record._id}"]`);</td></tr>
+<tr><td class="gut">87</td><td>  await expect(row.getByTestId("record-date-of-joining-empty")).toHaveCount(1);</td></tr>
+<tr><td class="gut">88</td><td>  await expect(row.getByTestId("record-date-of-joining")).toHaveText("");</td></tr>
+<tr><td class="gut">89</td><td>});</td></tr>
+<tr><td class="gut">90</td><td> </td></tr>
+<tr><td class="gut">91</td><td>test("the date can be added when editing a record that has only a name", async ({ page, request }) =&gt; {</td></tr>
+<tr><td class="gut">92</td><td>  const res = await request.post(`${API}/record`, { data: { name: "DOJ Name Only" } });</td></tr>
+<tr><td class="gut">93</td><td>  expect(res.status()).toBe(201);</td></tr>
+<tr><td class="gut">94</td><td>  const record = await res.json();</td></tr>
+<tr><td class="gut">95</td><td>  created.push(record._id);</td></tr>
+<tr><td class="gut">96</td><td> </td></tr>
+<tr><td class="gut">97</td><td>  await page.goto(`/edit/${record._id}`);</td></tr>
+<tr><td class="gut">98</td><td>  await expect(page.getByTestId("record-name-input")).toHaveValue("DOJ Name Only");</td></tr>
+<tr><td class="gut">99</td><td>  await page.getByTestId("record-date-of-joining-input").fill("2022-06-30");</td></tr>
+<tr><td class="gut">100</td><td>  await page.getByTestId("record-submit").click();</td></tr>
+<tr><td class="gut">101</td><td> </td></tr>
+<tr><td class="gut">102</td><td>  const row = page.locator(`[data-testid="record-row"][data-record-id="${record._id}"]`);</td></tr>
+<tr><td class="gut">103</td><td>  await expect(row.getByTestId("record-date-of-joining")).toHaveText("2022-06-30");</td></tr>
+<tr><td class="gut">104</td><td>});</td></tr>
+<tr><td class="gut">105</td><td> </td></tr>
+<tr><td class="gut">106</td><td>test("the date can be set on create and cleared on edit through the form", async ({ page, request }) =&gt; {</td></tr>
+<tr><td class="gut">107</td><td>  const name = `DOJ Form ${crypto.randomUUID()}`;</td></tr>
+<tr><td class="gut">108</td><td>  await page.goto("/create");</td></tr>
+<tr><td class="gut">109</td><td>  await page.getByTestId("record-name-input").fill(name);</td></tr>
+<tr><td class="gut">110</td><td>  await page.getByTestId("record-position-input").fill("QA Engineer");</td></tr>
+<tr><td class="gut">111</td><td>  await page.getByTestId("record-level-senior").check();</td></tr>
+<tr><td class="gut">112</td><td>  await page.getByTestId("record-date-of-joining-input").fill("2023-11-01");</td></tr>
+<tr><td class="gut">113</td><td>  await page.getByTestId("record-submit").click();</td></tr>
+<tr><td class="gut">114</td><td>  await expect(page.getByTestId("record-list")).toBeVisible();</td></tr>
+<tr><td class="gut">115</td><td> </td></tr>
+<tr><td class="gut">116</td><td>  const all = await (await request.get(`${API}/record`)).json();</td></tr>
+<tr><td class="gut">117</td><td>  const record = all.find((r) =&gt; r.name === name);</td></tr>
+<tr><td class="gut">118</td><td>  expect(record, "form submission should create the record").toBeTruthy();</td></tr>
+<tr><td class="gut">119</td><td>  created.push(record._id);</td></tr>
+<tr><td class="gut">120</td><td>  expect(record).toHaveProperty("dateOfJoining", "2023-11-01");</td></tr>
+<tr><td class="gut">121</td><td> </td></tr>
+<tr><td class="gut">122</td><td>  await page.goto(`/edit/${record._id}`);</td></tr>
+<tr><td class="gut">123</td><td>  const input = page.getByTestId("record-date-of-joining-input");</td></tr>
+<tr><td class="gut">124</td><td>  await expect(input).toHaveValue("2023-11-01");</td></tr>
+<tr><td class="gut">125</td><td>  await input.fill("");</td></tr>
+<tr><td class="gut">126</td><td>  await page.getByTestId("record-submit").click();</td></tr>
+<tr><td class="gut">127</td><td> </td></tr>
+<tr><td class="gut">128</td><td>  const row = page.locator(`[data-testid="record-row"][data-record-id="${record._id}"]`);</td></tr>
+<tr><td class="gut">129</td><td>  await expect(row.getByTestId("record-date-of-joining-empty")).toHaveCount(1);</td></tr>
+<tr><td class="gut">130</td><td>});</td></tr>
+<tr><td class="gut">131</td><td> </td></tr></tbody></table></div>
+    </details>
+  </section>
+
+  <section>
+    <h2><span class="num">08 / Enforcement</span>The gate over the untouched application</h2>
+    <p>The gate checks changed files against four rules. Run over the application as it stands, it
+      reports twelve violations in under a second &mdash; the same defects the commands in section 02
+      find at runtime, before anything executes.</p>
+
+    <pre class="term">  <span class="d">FAIL</span>  testability gate &mdash; 12 violation(s)
+
+  stable-hooks
+    RecordList.jsx:26  &lt;Link&gt; has no data-testid
+    RecordList.jsx:32  &lt;button&gt; has no data-testid
+
+  status-before-body
+    record.js:18, 27, 28, 41, 62, 77   .status() after .send() does nothing
+
+  machine-readable-errors
+    record.js:44, 65, 80   error body is a bare string
+
+  validate-at-boundary
+    record.js:24  new ObjectId() without an ObjectId.isValid() guard</pre>
+
+    <p style="margin-top:18px">It checks <strong>changed files only</strong>, deliberately. The rule
+      is to stop adding untestable code, not to retrofit an existing codebase.</p>
+  </section>
+
+  <section>
+    <h2><span class="num">09 / Limits</span>What this does and does not show</h2>
+    <p>Stated plainly, because they bound what the session claims.</p>
+    <ul class="notes">
+      <li><strong>One run per branch.</strong> Coding agents are non-deterministic. This is not a
+        repeated trial and no statistical claim is made.</li>
+      <li><strong>One application, one feature, one stack.</strong> Nothing here establishes a
+        general effect size.</li>
+      <li><strong>The rule book names an error-envelope convention, and the pre-written suite
+        asserts that convention.</strong> Standardising an error shape is what a shared team
+        convention is for &mdash; but it means part of the treatment's pass rate reflects a shape the
+        rule book supplied. This is stated openly in the session.</li>
+      <li><strong>The control could see the pre-written test suite and did not use it.</strong> The
+        suite was left in place rather than hidden, so the control was not deprived of the
+        requirements. That it did not apply them is part of the finding: the same information,
+        positioned as tests rather than as rules, did not change what was built.</li>
+      <li><strong>No test-stability measurement is made.</strong> The trial compares what was built,
+        not flakiness across repeated runs.</li>
+      <li><strong>One pre-written test is expected to remain red on the treatment branch</strong><span class="pending">confirmation pending</span>
+        &mdash; it asserts a hook on a control living in a file the agent never opened. Verified from
+        the diff; the suite run itself is outstanding. It is reported as a finding rather than
+        smoothed over: rules apply to code as it is written, so an application converts
+        incrementally.</li>
+    </ul>
+  </section>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Artifacts available on request: the repository with both agent runs preserved as branches,
+      the two diffs in full, the gate report, the twelve-test suite the treatment run produced, and
+      transcripts of the commands shown above. The defects examined here are typical of
+      tutorial-grade code generally and are not a criticism of the repository they were found in.</p>
+  </div>
+</footer>
+
+</body>
+</html>
